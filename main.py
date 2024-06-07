@@ -28,10 +28,15 @@ class Game:
         self.food_image = pygame.image.load("food.png")
         self.food_image = pygame.transform.scale(self.food_image, (104, 104))
         self.jumpscare_image = pygame.image.load("jumpscare.png")
+
+
         self.jumpscare_sound = pygame.mixer.Sound("jumpscare.mp3")
+        self.jumpscar_sound = pygame.mixer.Sound("jumpscare.wav")
+        self.jumpsca_sound = pygame.mixer.Sound("jumpsca.mp3")
         self.coin = pygame.mixer.Sound("coin_2.mp3")
         self.jumpscare_sound.set_volume(1.0)
         self.music = pygame.mixer.Sound("music.mp3")
+        self.rickroll = pygame.mixer.Sound("rickroll.mp3")
         self.music.play(loops=-1)
         self.music.set_volume(1.0)
 
@@ -51,6 +56,7 @@ class Game:
 
         if self.lost:
             self.music.stop()
+            pygame.mixer.Sound.play(self.rickroll, loops=-1)
             for i in range(998):
                 self.jumpscare()    
 
@@ -109,7 +115,12 @@ class Game:
         pygame.display.set_caption(f'MINOR GAME | {self.score}')
 
     def jumpscare(self):
-        self.screen.fill((0, 0, 0))  # Clear screen
+
+        absolutecolor = random.randint(0, 1)
+        self.screen.fill((absolutecolor*255, absolutecolor*255, absolutecolor*255))  # Clear screen
+
+        
+
         if self.jx >= 3:
             self.screen.blit(pygame.transform.scale(self.jumpscare_image, (1000, 600)), (self.jx, self.jy))
         else:
@@ -117,6 +128,8 @@ class Game:
         self.jx = random.randint(0, 10)
         self.jy = random.randint(0, 10)
         pygame.mixer.Sound.play(self.jumpscare_sound)
+        pygame.mixer.Sound.play(self.jumpscar_sound)
+        pygame.mixer.Sound.play(self.jumpsca_sound)
         pygame.display.flip()
 
 game = Game()
