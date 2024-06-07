@@ -89,7 +89,7 @@ class Game:
             if self.fps <= 600:
                 self.fps += 20
             else:
-                self.player_speed += 1 
+                self.player_speed = 2 
 
         if self.player_rect.x < 0 or self.player_rect.x > 960 or self.player_rect.y < 0 or self.player_rect.y > 560:
             self.loose()
